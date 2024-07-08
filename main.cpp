@@ -343,13 +343,7 @@ void loadData() {
         {"Computer Club", 0, MAX_MEMBERS_PER_CLUB, {}}
     };
 
-    // Sample student data (for testing purposes)
-    students = {
-        {"John", "Doe", "Male", 20, 1, 0, {0, 1, 2}},
-        {"Jane", "Smith", "Female", 19, 2, 1, {}},
-        {"Michael", "Brown", "Male", 21, 1, 2, {3}},
-        {"Emily", "Johnson", "Female", 20, 3, -1, {}}
-    };
+ 
 
     // Assign members to initial clubs/societies and sports
     for (auto& student : students) {
