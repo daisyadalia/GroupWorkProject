@@ -2,33 +2,33 @@
 #include <iomanip>
 #include <vector>
 #include <string>
-#include <algorithm> // For std::find
-#include <fstream>   // For file handling
+#include <algorithm> 
+#include <fstream>   
 using namespace std;
 
-// Constants for maximum capacities and gender percentages
+
 const int MAX_STUDENTS_PER_GROUP = 50;
 const int MAX_STUDENTS_PER_SPORT = 20;
 const int MAX_MEMBERS_PER_CLUB = 60;
 const double MAX_PERCENTAGE_MALE_SPORT = 0.75;
 const double MAX_PERCENTAGE_MALE_CLUB = 0.5;
 
-// Structures for student and activity (sport or club)
+
 struct Student {
     string firstname;
     string surname;
     string gender;
     int age;
     int bbitGroup;
-    int sportIndex;           // -1 if no sport assigned
-    vector<int> clubIndices;  // empty if no clubs assigned
+    int sportIndex;           
+    vector<int> clubIndices;  
 };
 
 struct Activity {
     string name;
     int currentCapacity;
     int maxCapacity;
-    vector<int> members;  // stores indices of students involved
+    vector<int> members;  
 };
 
 // Global vectors to store data
@@ -48,10 +48,10 @@ void assignActivity(Student& student);
 bool isMaleExceedPercentage(const Activity& activity, const Student& student, double maxPercentage);
 void displayActivities(const vector<Activity>& activities);
 void displayStudentsByGroup(int group);
-void loadData();  // Function to load initial data (for testing purposes)
+void loadData();  
 
 int main() {
-    loadData();  // Load initial data (for testing purposes)
+    loadData();  
 
     int choice;
     do {
@@ -154,7 +154,7 @@ void viewStudents() {
             for (int clubIndex : student.clubIndices) {
                 clubs += clubsSocieties[clubIndex].name + ", ";
             }
-            clubs = clubs.substr(0, clubs.size() - 2);  // Remove last comma
+            clubs = clubs.substr(0, clubs.size() - 2);  
             cout << setw(20) << clubs;
         } else {
             cout << setw(20) << "-";
@@ -224,7 +224,7 @@ void saveData() {
             for (int clubIndex : student.clubIndices) {
                 clubs += clubsSocieties[clubIndex].name + ", ";
             }
-            clubs = clubs.substr(0, clubs.size() - 2);  // Remove last comma
+            clubs = clubs.substr(0, clubs.size() - 2);  
             outFile << clubs;
         } else {
             outFile << "-";
@@ -253,7 +253,7 @@ void assignActivity(Student& student) {
             if (sportIndex >= 0 && sportIndex < sports.size()) {
                 if (sports[sportIndex].currentCapacity < MAX_STUDENTS_PER_SPORT) {
                     student.sportIndex = sportIndex;
-                    sports[sportIndex].members.push_back(students.size() - 1);  // Index of the newly added student
+                    sports[sportIndex].members.push_back(students.size() - 1);  
                     sports[sportIndex].currentCapacity++;
                     cout << "Sport assigned successfully!" << endl;
                 } else {
@@ -328,31 +328,37 @@ void displayStudentsByGroup(int group) {
 void loadData() {
     // Initialize sports
     sports = {
-        {"Rugby", 0, MAX_STUDENTS_PER_SPORT, {}},
-        {"Athletics", 0, MAX_STUDENTS_PER_SPORT, {}},
-        {"Swimming", 0, MAX_STUDENTS_PER_SPORT, {}},
-        {"Soccer", 0, MAX_STUDENTS_PER_SPORT, {}}
+            {"Rugby", 0, MAX_STUDENTS_PER_SPORT, {}},
+            {"Athletics", 0, MAX_STUDENTS_PER_SPORT, {}},
+            {"Swimming", 0, MAX_STUDENTS_PER_SPORT, {}},
+            {"Soccer", 0, MAX_STUDENTS_PER_SPORT, {}}
     };
 
     // Initialize clubs/societies
     clubsSocieties = {
-        {"Journalism", 0, MAX_MEMBERS_PER_CLUB, {}},
-        {"Red Cross Society", 0, MAX_MEMBERS_PER_CLUB, {}},
-        {"AISEC", 0, MAX_MEMBERS_PER_CLUB, {}},
-        {"Business Club", 0, MAX_MEMBERS_PER_CLUB, {}},
-        {"Computer Club", 0, MAX_MEMBERS_PER_CLUB, {}}
+            {"Journalism", 0, MAX_MEMBERS_PER_CLUB, {}},
+            {"Red Cross Society", 0, MAX_MEMBERS_PER_CLUB, {}},
+            {"AISEC", 0, MAX_MEMBERS_PER_CLUB, {}},
+            {"Business Club", 0, MAX_MEMBERS_PER_CLUB, {}},
+            {"Computer Club", 0, MAX_MEMBERS_PER_CLUB, {}}
     };
 
- 
+    // Sample student data
+    students = {
+            {"John", "Doe", "Male", 20, 1, 0, {0, 1, 2}},
+            {"Jane", "Smith", "Female", 19, 2, 1, {}},
+            {"Michael", "Brown", "Male", 21, 1, 2, {3}},
+            {"Emily", "Johnson", "Female", 20, 3, -1, {}}
+    };
 
     // Assign members to initial clubs/societies and sports
     for (auto& student : students) {
         if (student.sportIndex != -1) {
-            sports[student.sportIndex].members.push_back(&student - &students[0]);  // Calculate index
+            sports[student.sportIndex].members.push_back(&student - &students[0]);  
             sports[student.sportIndex].currentCapacity++;
         }
         for (int clubIndex : student.clubIndices) {
-            clubsSocieties[clubIndex].members.push_back(&student - &students[0]);  // Calculate index
+            clubsSocieties[clubIndex].members.push_back(&student - &students[0]);  
             clubsSocieties[clubIndex].currentCapacity++;
         }
     }
