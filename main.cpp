@@ -350,6 +350,7 @@ void loadData() {
             {"Michael", "Brown", "Male", 21, 1, 2, {3}},
             {"Emily", "Johnson", "Female", 20, 3, -1, {}}
     };
+    
 
     // Assign members to initial clubs/societies and sports
     for (auto& student : students) {
