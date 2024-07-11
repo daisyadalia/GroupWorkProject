@@ -351,8 +351,7 @@ void loadData() {
             {"Emily", "Johnson", "Female", 20, 3, -1, {}}
     };
     
-
-    // Assign members to initial clubs/societies and sports
+   // Assign members to initial clubs/societies and sports
     for (auto& student : students) {
         if (student.sportIndex != -1) {
             sports[student.sportIndex].members.push_back(&student - &students[0]);  
@@ -366,3 +365,5 @@ void loadData() {
 
     cout << "Initial data loaded successfully." << endl;
 }
+
+ 
