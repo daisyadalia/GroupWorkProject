@@ -6,13 +6,11 @@
 #include <fstream>   
 using namespace std;
 
-
 const int MAX_STUDENTS_PER_GROUP = 50;
 const int MAX_STUDENTS_PER_SPORT = 20;
 const int MAX_MEMBERS_PER_CLUB = 60;
 const double MAX_PERCENTAGE_MALE_SPORT = 0.75;
 const double MAX_PERCENTAGE_MALE_CLUB = 0.5;
-
 
 struct Student {
     string firstname;
@@ -37,6 +35,7 @@ vector<Activity> sports;
 vector<Activity> clubsSocieties;
 
 // Function prototypes
+
 void displayMenu();
 void addStudent();
 void viewStudents();
